@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+      <div class="col s5"> 
+        <div class="card">
+          <div class="card-content">
+            <form #purchaseForm="ngForm" (ngSubmit) = "addPurchase(purchaseForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "purchaseService.selectedPurchase._id">
+              <div class="row">
+              <div class="input-field col s12">
+                <input type="text" name="name" #name="ngModel" [(ngModel)]="purchaseService.selectedPurchase.name" 
+                placeholder="Enter you Name">
+              </div>
+              <div class="input-field col s12">
+                  <input type="text" name="supplier" #supplier="ngModel" [(ngModel)]="purchaseService.selectedPurchase.supplier" 
+                  placeholder="Enter you supplier">
+             </div>
+             <div class="input-field col s12">
+                <input type="text" name="product" #product="ngModel" [(ngModel)]="purchaseService.selectedPurchase.product" 
+                placeholder="Enter you product">
+              </div>
+              <div class="input-field col s12">
+                  <input type="text" name="amount" #amount="ngModel" [(ngModel)]="purchaseService.selectedPurchase.amount" 
+                  placeholder="Enter you amount">
+                </div>
+  
+                <div class="card-action">
+                  <div class="input-field col s12">
+                    
+                    <button class="btn" style="margin-left:2px">Save</button>
+                    <button class="btn right" (click)="resetForm(purchaseForm)" >Clean</button>
+                  </div>
+  
+                </div>
+              </div>
+  
+  
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--tabla para traer los datos-->
+      <div class="col s7">
+        <table>
+          <thead>
+            <th>Name</th>
+            <th>Supplier</th>
+            <th>Product</th>
+            <th>Amount</th>
+          </thead>
+          <tbody>
+            <tr *ngFor='let purchase of purchaseService.purchases'>
+              <td>{{ purchase.name}}</td>
+              <td>{{ purchase.supplier}}</td>
+              <td>{{ purchase.product}}</td>
+              <td>{{ purchase.amount}}</td>
+              <td>
+                <a (click)="editPurchase(purchase)">
+                  <i class="material-icons">edit</i> 
+                </a>
+                  <a (click)="deletePurchase(purchase._id)">
+                    <i class="material-icons">delete</i> 
+                  </a>
+                </td>
+            
+            </tr>
+          </tbody>
+        </table>
+  
+      </div>
+      
+    </div>
+  </div>

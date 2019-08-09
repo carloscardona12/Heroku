@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col s5">
+      <div class="card">
+        <div class="card-content">
+          <form #clientForm="ngForm" (ngSubmit)="addClient(clientForm)" >
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="clientService.selectedClient._id">  
+            <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" name="nameC" #nameC="ngModel" [(ngModel)]="clientService.selectedClient.nameC" placeholder="Enter You Name">
+                </div>
+                <div class="input-field col s12">
+                  <input type="text" name="credit" #credit="ngModel" [(ngModel)]="clientService.selectedClient.credit" placeholder="Enter You Credit ">
+                </div>
+                <div class="card-action">
+                  <div class="input-field col s12">
+                    <button class="btn right" style="margin-left: 10px;" (click)="resetForm(clientForm)">CLEAN</button>
+                    <button class="btn right">SAVE</button>
+                  </div>
+                </div>
+             </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col s7">
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Credit</th>
+          <th>Operations</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clientService.client">
+            <td>{{ client.nameC}}</td>
+            <td>{{ client.credit}}</td>
+            <td>
+              <a (click)="editClient(client)"><i class="material-icons">edit</i></a>
+              <a (click)="deleteClient(client._id)"><i class="material-icons">delete</i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

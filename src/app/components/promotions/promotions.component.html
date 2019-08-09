@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="col s5">
+      <div class="card">
+      <div class="card-content">
+          <form #promotionForm="ngForm" (ngSubmit) = "addPromotion(promotionForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "promotionService.selectedPromotion._id">
+              <div class="row">
+             
+          
+              <div class="input-field col s12" >
+                  <input type="number" name="discount" #discount="ngModel" [(ngModel)]="promotionService.selectedPromotion.discount" 
+                  placeholder="Enter you discount" required pattern="[0-1]+">
+                  <span *ngIf="discount.touched && discount.valid">
+                    El descuento  es obligatorio 
+                  </span>
+              </div>
+              
+
+              <div class="input-field col s12">
+                  <input type="text" name="reason" #reason="ngModel" [(ngModel)]="promotionService.selectedPromotion.reason" 
+                  placeholder="Enter you reason" required>
+                </div>
+  
+             <div class="card-action">
+                  <div class="input-field col s12">
+                    <button class="btn" style="margin-left:2px">Save</button>
+                    <button class="btn right" (click)="resetForm(promotionForm)" >Clean</button>
+                  </div>
+  
+             </div>
+              </div>
+  
+  
+            </form>
+
+
+     </div>
+    </div>
+    </div>
+    <div class="col s7">
+        <table>
+          <thead>
+            <th>discount</th>
+            <th>reason</th>
+            
+            
+          </thead>
+          <tbody>
+            <tr *ngFor='let promotion of promotionService.promotions'>
+              <td>{{ promotion.discount}}</td>
+              <td>{{ promotion.reason}}</td> 
+                         
+              <td>
+                <a (click)="editPromotion(promotion)">
+                  <i class="material-icons">edit</i> 
+                </a>
+                  <a (click)="deletePromotion(promotion._id)">
+                    <i class="material-icons">delete</i> 
+                  </a>
+                </td>
+            
+            </tr>
+          </tbody>
+        </table>
+  
+      </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col s5">
+      <div class="card">
+      <div class="card-content">
+
+          <form #discountForm="ngForm" (ngSubmit) = "addDiscount(discountForm)">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]= "discountService.selectedDiscount._id">
+              <div class="row">
+             
+          
+              <div class="input-field col s12" >
+                  <input type="number" name="percentage" #percentage="ngModel" [(ngModel)]="discountService.selectedDiscount.percentage" 
+                  placeholder="Enter you percentaje">
+              </div>
+              
+
+              <div class="input-field col s12">
+                  <input type="text" name="reason" #name="ngModel" [(ngModel)]="discountService.selectedDiscount.reason" 
+                  placeholder="Enter you Name">
+                </div>
+  
+             <div class="card-action">
+                  <div class="input-field col s12">
+                    <button class="btn" style="margin-left:2px">Save</button>
+                    <button class="btn right" (click)="resetForm(discountForm)" >Clean</button>
+                  </div>
+  
+             </div>
+              </div>
+  
+  
+            </form>
+
+
+     </div>
+    </div>
+    </div>
+    <div class="col s7">
+        <table>
+          <thead>
+            <th>Percentaje</th>
+            <th>reason</th>
+            
+            
+          </thead>
+          <tbody>
+            <tr *ngFor='let discount of discountService.discounts'>
+              <td>{{ discount.percentage}}</td>
+              <td>{{ discount.reason}}</td> 
+                         
+              <td>
+                <a (click)="editDiscount(discount)">
+                  <i class="material-icons">edit</i> 
+                </a>
+                  <a (click)="deleteDiscount(discount._id)">
+                    <i class="material-icons">delete</i> 
+                  </a>
+                </td>
+            
+            </tr>
+          </tbody>
+        </table>
+  
+      </div>
+  </div>
+</div>
